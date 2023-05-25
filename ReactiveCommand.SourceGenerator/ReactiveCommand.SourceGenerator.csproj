@@ -7,6 +7,15 @@
 		<CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
 		<IsRoslynComponent>true</IsRoslynComponent>
 		<LangVersion>latest</LangVersion>
+		
+		<PackageId>ReactiveCommand.SourceGenerator</PackageId>
+		<PackageTags>SourceGenerator;MVVM;Binding</PackageTags>
+		<Copyright>Copyright © Lázár Zsolt 2023</Copyright>
+		<PackageProjectUrl>https://github.com/SparkyTD/ReactiveCommand.SourceGenerator</PackageProjectUrl>
+		<Authors>Lázár Zsolt</Authors>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryType>git</RepositoryType>
+		<Description>A simple ReactiveCommand Source Generator, that generates boilerplate code as part of the build process.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
