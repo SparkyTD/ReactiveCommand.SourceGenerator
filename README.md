@@ -1,4 +1,7 @@
 # ReactiveCommand.SourceGenerator
+
+[![NuGet](https://img.shields.io/nuget/v/ReactiveCommand.SourceGenerator.svg)](https://www.nuget.org/packages/ReactiveCommand.SourceGenerator/)
+
 ReactiveCommandAttribute is a convenient Source Generator library designed to enhance your development experience with the ReactiveUI library by automating the creation of ReactiveCommands.
 
 The centerpiece of the package is the `ReactiveCommand` attribute. When attached to a method within your partial ViewModel class, this attribute triggers a build step that automatically extends the class with the corresponding ReactiveCommand properties and an initializer function.
