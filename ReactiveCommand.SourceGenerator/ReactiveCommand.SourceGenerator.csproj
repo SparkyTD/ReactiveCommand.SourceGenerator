@@ -16,6 +16,8 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryType>git</RepositoryType>
 		<Description>A simple ReactiveCommand Source Generator, that generates boilerplate code as part of the build process.</Description>
+		<Version>1.0.1</Version>
+		<RepositoryUrl>https://github.com/SparkyTD/ReactiveCommand.SourceGenerator</RepositoryUrl>
 	</PropertyGroup>
 
 	<ItemGroup>
