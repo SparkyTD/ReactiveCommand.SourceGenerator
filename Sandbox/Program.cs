@@ -1,17 +1,21 @@
 ﻿using System.Drawing;
 using System.Reactive;
+using System.Text;
 using ReactiveCommand.SourceGenerator.Attributes;
 using ReactiveUI;
 
 namespace Sandbox.Test;
 
-public partial class Program
+public static class EntryPoint
 {
     public static void Main()
     {
-        new Program().Init();
+        new TestClass().Init();
     }
+}
 
+public partial class TestClass
+{
     public void Init()
     {
         InitializeCommands();
@@ -40,7 +44,7 @@ public partial class Program
 
     [ReactiveCommand]
     public async Task<Rectangle> Test4Async() => default;
-    
+
     [ReactiveCommand]
     public int Test5StringToInt(string str) => int.Parse(str);
 

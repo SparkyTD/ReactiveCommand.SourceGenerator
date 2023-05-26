@@ -12,13 +12,11 @@ namespace ReactiveCommand.SourceGenerator;
 [Generator]
 public class Generator : ISourceGenerator
 {
-    // private const string LogPath = @"C:\Users\Sparky\Desktop\log.txt";
-    // public static readonly StreamWriter Log = new(new FileStream(LogPath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite)) { AutoFlush = true };
-
-    // public Generator()
-    // {
-    //     Console.SetOut(Log);
-    // }
+    public Generator()
+    {
+        // const string LogPath = @"C:\Users\Sparky\Desktop\log.txt";
+        // Console.SetOut(new StreamWriter(new FileStream(LogPath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite)) { AutoFlush = true });
+    }
 
     public void Initialize(GeneratorInitializationContext context)
     {
@@ -36,7 +34,10 @@ public class Generator : ISourceGenerator
             writer.WriteLine($"namespace {classExtensionInfo.ClassNamespace}");
             writer.WriteLine("{");
             writer.Indent++;
-            writer.WriteLine($"public partial class {classExtensionInfo.ClassName}");
+            bool isAbstract = classExtensionInfo.DeclarationSyntax.Modifiers.Any(SyntaxKind.AbstractKeyword);
+            writer.WriteLine($"public {(isAbstract ? "abstract" : null)} partial class {classExtensionInfo.ClassName}");
+            writer.WriteLine($"{classExtensionInfo.DeclarationSyntax.TypeParameterList}");
+            writer.WriteLine($"{classExtensionInfo.DeclarationSyntax.ConstraintClauses}");
             writer.WriteLine("{");
             writer.Indent++;
             foreach (var commandExtensionInfo in classExtensionInfo.CommandExtensionInfos)
@@ -63,7 +64,7 @@ public class Generator : ISourceGenerator
                         ? $"{commandName} = ReactiveUI.ReactiveCommand.Create({commandExtensionInfo.MethodName});"
                         : $"{commandName} = ReactiveUI.ReactiveCommand.CreateFromTask({commandExtensionInfo.MethodName});");
                 }
-                else if(commandExtensionInfo.ArgumentType != null && !commandExtensionInfo.IsReturnTypeVoid)
+                else if (commandExtensionInfo.ArgumentType != null && !commandExtensionInfo.IsReturnTypeVoid)
                 {
                     writer.WriteLine(!commandExtensionInfo.IsTask
                         ? $"{commandName} = ReactiveUI.ReactiveCommand.Create<{inputType}, {outputType}>({commandExtensionInfo.MethodName});"
@@ -86,7 +87,7 @@ public class Generator : ISourceGenerator
             writer.WriteLine("}");
 
             context.AddSource($"{classExtensionInfo.ClassName}.g.cs", stringStream.ToString());
-            // Console.Out.WriteLine(stringStream);
+            Console.Out.WriteLine(stringStream);
         }
     }
 
@@ -106,11 +107,11 @@ public class Generator : ISourceGenerator
                 var classNamespace = classSymbol.ContainingNamespace.ToString();
                 var typeName = declaredClass.Identifier.ValueText;
 
-
                 var classExtensionInfo = new ClassExtensionInfo
                 {
                     ClassName = typeName,
-                    ClassNamespace = classNamespace
+                    ClassNamespace = classNamespace,
+                    DeclarationSyntax = declaredClass
                 };
 
                 var methodMembers = declaredClass.Members
