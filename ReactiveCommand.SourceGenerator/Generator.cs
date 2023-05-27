@@ -86,7 +86,7 @@ public class Generator : ISourceGenerator
             writer.Indent--;
             writer.WriteLine("}");
 
-            context.AddSource($"{classExtensionInfo.ClassName}.g.cs", stringStream.ToString());
+            context.AddSource($"{classExtensionInfo.ClassName}.ReactiveCommand.g.cs", stringStream.ToString());
             Console.Out.WriteLine(stringStream);
         }
     }
